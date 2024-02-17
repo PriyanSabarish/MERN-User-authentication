@@ -12,7 +12,7 @@ export default function Register() {
     try{
         console.log(values);
         // const {data} = await axios.post("http://localhost:4000/register",{...values});
-        const data = await axios.post("http://localhost:4000/register",{email:"asdas",password:"asdasdasd"})
+        const data = await axios.post("http://localhost:4000/register",{...values},{withCredentials: true})
                 .then(resp => {
                 console.log(resp.data);
                 })
@@ -27,8 +27,7 @@ export default function Register() {
           
         }
       }catch(err){
-
-      console.log("Register post error "+err);
+      console.log("Register post error "+err.message);
     }
   }
   

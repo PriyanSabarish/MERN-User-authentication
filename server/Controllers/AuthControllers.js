@@ -5,7 +5,7 @@ const expirey = 3*24*60*60;
 
 exports.register = async (req, res) => {
     try {
-        console.log(req);
+        console.log(req.body);
         const { email, password } = req.body;
         console.log(email,password);
         // Hash password before saving
@@ -43,7 +43,7 @@ module.exports.login = async (req,res,next) => {
         try{
             console.log(req)
             const { email, password } = req.body;
-            Console.log(email,password);
+            console.log(email,password);
             const user = await User.login(email, password);
             const token = jwt.sign({ userId: user._id }, 'your coochie is my secret key', { expiresIn: '365d' });
 

@@ -10,7 +10,7 @@ router.use(cors({
 }));
 
 
-//router.post("/", checkUser); 
+router.post("/", checkUser); 
 router.post("/register",register);
 router.post("/login",login);
 

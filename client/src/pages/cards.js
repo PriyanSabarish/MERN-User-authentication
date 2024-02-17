@@ -7,27 +7,29 @@ import axios from "axios";
 export default function Cards() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
-  // useEffect(() => {
-  //   const verifyUser = async () => {
-  //     if (!cookies.jwt) {
-  //       navigate("/login");
-  //     } else {
-  //       const { data } = await axios.post(
-  //         "http://localhost:4000",
-  //         {},
-  //         {
-  //           withCredentials: true,
-  //         }
-  //       );
-  //       if (!data.status) {
-  //         removeCookie("jwt");
-  //         navigate("/login");
-  //       } else
-  //         console.log(data.user)
-  //     }
-  //   };
-  //   verifyUser();
-  // }, [cookies, navigate, removeCookie]);
+  useEffect(() => {
+    const verifyUser = async () => {
+      if (!cookies.jwt) {
+        console.log(cookies.jwt)
+        navigate("/login");
+      } else {
+        const { data } = await axios.post(
+          "http://localhost:4000",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+        if (!data.status) {
+          console.log(data.status)
+          removeCookie("jwt");
+          navigate("/login");
+        } else
+          console.log(data.user)
+      }
+    };
+    verifyUser();
+  }, [cookies, navigate, removeCookie]);
 
 
   const logOut = () => {

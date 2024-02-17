@@ -1,5 +1,5 @@
 const express = require("express");
-
+const bodyParser = require('body-parser');
 const app = express()
 const mongoose= require("mongoose")
 const authRoutes = require("./Routes/AuthRoutes")
@@ -11,12 +11,6 @@ const cookieParser = require("cookie-parser")
 //     methods : ["GET"],
 //     credentials: true
 // }));
-
-app.use("/", authRoutes);
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 mongoose.connect("mongodb://localhost:27017/jwt").then(() => {
     app.listen(4000, ()=> {
         console.log("Server Started")
@@ -25,5 +19,12 @@ mongoose.connect("mongodb://localhost:27017/jwt").then(() => {
 }).catch((err) => {
     console.log(err.message);
 });
+
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/", authRoutes);
 
 
